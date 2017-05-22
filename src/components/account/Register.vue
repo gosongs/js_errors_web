@@ -40,6 +40,7 @@
 </template>
 
 <script>
+  import md5 from 'blueimp-md5'
   export default{
     data(){
       const required = {required: true, message: '必填', trigger: 'change'};
@@ -79,7 +80,7 @@
             $.post(api + '/account/register', {
               username: this.formData.username,
               email: this.formData.email,
-              password: this.formData.password
+              password: md5(this.formData.password)
             })
               .then(res => {
                 this.loading = false;

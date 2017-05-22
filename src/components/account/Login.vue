@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import md5 from 'blueimp-md5'
   export default{
     data(){
       return {
@@ -54,24 +55,25 @@
             this.loading = true;
             $.post(api + '/account/login', {
               username: this.formData.username,
-              password: this.formData.password
+              password: md5(this.formData.password)
             })
               .then(res => {
                 this.loading = false;
                 if (res.Code === 0) {
                   const user = {
                     username: this.formData.username,
-                    token: res.Data.token
+                    token: res.Data.token,
+                    uid: res.Data.uid
                   };
                   this.$store.commit('SET_USER', user);
-                  this.$router.push('/dashboard');
-
                   // local storage 存储一份
-                  const storage = window.localStorage;
-                  if(storage.getItem('user')){
-                    storage.removeItem('user');
+                  if(this.$localStorage.get('user')){
+                    this.$localStorage.remove('user');
                   }
-                  storage.setItem('user', JSON.stringify(user));
+                  this.$localStorage.set('user', JSON.stringify(user));
+
+                  // 先存储再跳转
+                  this.$router.push('/dashboard');
                 } else {
                   this.$Message.error(res.Message);
                 }

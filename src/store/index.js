@@ -6,6 +6,9 @@ import actions from './actions'
 import mutations from './mutations'
 import plugins from './plugins'
 
+import errors from './modules/errors'
+import projects from './modules/projects'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -13,7 +16,11 @@ const store = new Vuex.Store({
   getters,
   actions,
   mutations,
-  plugins
+  plugins,
+  modules: [
+    errors,
+    projects
+  ]
 })
 
 export default store

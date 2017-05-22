@@ -8,5 +8,6 @@ if (process.env.NODE_ENV == "production") {
 }
 
 export const state = {
-  DEV_API
-}
+  DEV_API,
+  currentModal: ''
+};

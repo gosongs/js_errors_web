@@ -4,7 +4,7 @@
 
     </div>
     <div class="head-account">
-      <Dropdown placement="bottom-end" trigger="click">
+      <Dropdown placement="bottom-end" trigger="click" @on-click="clickItem">
         <a href="javascript:void(0)">
           欢迎你, <b>{{user.username}}</b>
           <Icon type="arrow-down-b"></Icon>
@@ -12,7 +12,7 @@
         <Dropdown-menu slot="list">
           <Dropdown-item>账户设置</Dropdown-item>
           <Dropdown-item>登录历史</Dropdown-item>
-          <Dropdown-item>注销登录</Dropdown-item>
+          <Dropdown-item name="logout">注销登录</Dropdown-item>
         </Dropdown-menu>
       </Dropdown>
     </div>
@@ -23,7 +23,22 @@
   export default{
     computed: {
       user(){
-        return this.$store.state.user;
+        return this.$store.state.user || {username: ''};
+      }
+    },
+    methods: {
+      clickItem(name){
+        switch (name){
+          case 'logout':
+            this.logout();
+            break;
+          default:
+            break;
+        }
+      },
+      logout(){
+        this.$localStorage.remove('user');
+        this.$router.push('/account/login');
       }
     }
   }

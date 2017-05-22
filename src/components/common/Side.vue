@@ -3,6 +3,11 @@
     <a class="side-logo">
       <b>前端错误收集平台</b>
     </a>
+    <div class="side-toggle">
+      <Select v-model="curProject" style="width:200px; margin-left: 10px;">
+        <Option v-for="_ in projectsList" :value="_.name" :key="_.key">{{ _.name }}</Option>
+      </Select>
+    </div>
     <div class="side-list">
       <Menu theme="dark" @on-select="selectMenu">
         <Submenu name="project">
@@ -12,6 +17,15 @@
           </template>
           <Menu-item name="/project/create">创建项目</Menu-item>
           <Menu-item name="/project/my">我的项目</Menu-item>
+          <Menu-item name="/generateErr">生成错误</Menu-item>
+        </Submenu>
+        <Submenu name="errors">
+          <template slot="title">
+            <Icon type="ios-people"></Icon>
+            错误管理
+          </template>
+          <Menu-item name="/errors/count">图标统计</Menu-item>
+          <Menu-item name="/errors/list">错误列表</Menu-item>
         </Submenu>
         <Submenu name="user">
           <template slot="title">
@@ -32,18 +46,32 @@
 <script>
   export default{
     data(){
-      return{}
+      return {
+        curProject: ''
+      }
+    },
+    computed: {
+      projectsList(){
+        return this.$store.getters.projectsList || [];
+      }
     },
     methods: {
       selectMenu(name){
-        this.$router.push(name)
+        const key = this.$route.params.key;
+        this.$router.push(name + '/' + key)
       }
+    },
+    created(){
+      const data = {
+        uid: this.$store.state.user.uid
+      };
+      this.$store.dispatch('getProjectsList', data);
     }
   }
 </script>
 
 <style scoped lang="scss" type="text/scss">
-  .side{
+  .side {
     width: 220px;
     position: absolute;
     top: 0;
@@ -51,7 +79,10 @@
     bottom: 0;
     height: 100%;
     background: #464c5b;
-    &-logo{
+    &-toggle {
+      margin-top: 20px;
+    }
+    &-logo {
       font-weight: 400;
       font-size: 22px;
       width: 100%;
@@ -62,7 +93,7 @@
       padding-left: 10px;
       color: #fff;
     }
-    &-tool{
+    &-tool {
       position: fixed;
       bottom: 0;
       clear: both;
