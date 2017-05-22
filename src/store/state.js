@@ -1,30 +1,12 @@
-// Set the key we'll use in local storage.
-// Go to Chrome dev tools, application tab, click "Local Storage" and "http://localhost:8080"
-// and you'll see this key set below (if logged in):
 export const STORAGE_KEY = 'example-vue-project'
 
-let syncedData = {
-  auth: {
-    isLoggedIn: false,
-    accessToken: null,
-    refreshToken: null
-  },
-  user: {
-    name: null
-  }
+let DEV_API;
+if (process.env.NODE_ENV == "production") {
+  DEV_API = '';
+} else {
+  DEV_API = 'http://localhost:3000';
 }
 
-const notSyncedData = {
-  appnav: {
-    searchText: '',
-    searchTimestamp: null
-  }
+export const state = {
+  DEV_API
 }
-
-// Sync with local storage.
-if (localStorage.getItem(STORAGE_KEY)) {
-  syncedData = JSON.parse(localStorage.getItem(STORAGE_KEY))
-}
-
-// Merge data and export it.
-export const state = Object.assign(syncedData, notSyncedData)

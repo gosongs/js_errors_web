@@ -1,37 +1,30 @@
 <template>
-  <div id="app">
-    <app-nav></app-nav>
-    <div class="container app-content">
-      <router-view></router-view>
-    </div>
-    <app-footer></app-footer>
+  <div id="app" class="app full-screen">
+    <transition name="fade" mode="out-in" appear>
+      <router-view keep-alive></router-view>
+    </transition>
   </div>
 
 </template>
 
 <script>
-import AppNav from './AppNav.vue'
-import AppFooter from './AppFooter.vue'
-export default {
-  name: 'app',
-  components: { AppNav, AppFooter },
-  data () {
-    return {
+  export default {
+    name: 'app',
+    data () {
+      return {}
     }
   }
-}
 </script>
 
-<style lang="scss">
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.app-content {
-  padding: 60px 15px 0;
-}
+<style lang="scss" type="text/scss">
+  @import "../assets/scss/app";
+  .app {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .full-screen{
+    height: 100%;
+    width: 100%;
+  }
 </style>

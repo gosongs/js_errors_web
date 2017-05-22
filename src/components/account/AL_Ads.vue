@@ -1,17 +1,11 @@
 <template>
   <div>
-    <h1>
-      Hello VUE
-    </h1>
+    hello
   </div>
 </template>
 
 <script>
-  export default{
-    components: {
 
-    }
-  }
 </script>
 
 <style scoped lang="scss" type="text/scss">

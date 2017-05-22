@@ -1,33 +1,27 @@
-/* Twitter Bootstrap JS (this could also be handled in an app.js file) */
-require('bootstrap')
-
-/* Vue */
 import Vue from 'vue'
 import router from './router'
 import store from './store'
 import VueResource from 'vue-resource'
 
+import iView from 'iview/dist/iview.min'
+import 'iview/dist/styles/iview.css';
+Vue.use(iView)
+
 Vue.use(VueResource)
 Vue.config.productionTip = false
 
-/* App sass */
-import './assets/style/app.scss'
+import App from './components/App.vue'
 
-/* App component */
-import App from './components/App'
+router.beforeEach((to, from, next) => {
+  const storage = window.localStorage;
+  if (storage.getItem('user')) {
+    store.commit('SET_USER', JSON.parse(storage.getItem('user')));
+  }
+  next();
+});
 
-/* Auth plugin */
-import Auth from './auth'
-Vue.use(Auth)
-
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // Attach the Vue instance to the window,
-  // so it's available globally.
-  created: function () {
-    window.Vue = this
-  },
   router,
   store,
   render: h => h(App)

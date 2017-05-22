@@ -1,0 +1,49 @@
+.shadow {
+  border-radius: 2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+
+.panel {
+  @extend .shadow;
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 24px;
+  &-title {
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e3e8ee;
+    &:after{
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden
+    }
+    h3 {
+      float: left;
+      font-size: 14px;
+      color: #464c5b;
+      line-height: 16px;
+      font-weight: 600;
+    }
+    .panel-handle {
+      float: right;
+      color: #bdc5d5;
+      cursor: pointer;
+      .ivu-icon {
+        margin: 0 4px;
+        font-size: 14px;
+      }
+    }
+  }
+  &-body {
+    margin: 10px 0;
+  }
+}
