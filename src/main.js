@@ -15,6 +15,10 @@ Vue.config.productionTip = false
 
 // hack localStorage
 // https://github.com/pinguinjkeke/vue-local-storage
+// useage:
+// set: this.$localStorage.set('item', 'item_value');
+// get: this.$localStorage.get('item');
+// remove: this.$localStorage.remove('item');
 import VueLocalStorage from 'vue-localstorage'
 Vue.use(VueLocalStorage)
 

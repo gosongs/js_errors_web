@@ -2,23 +2,39 @@
   <div class="login">
     <div class="login-form">
       <div class="form-head">
-        登录
+        <router-link to="/">
+          <img src="/static/img/logo.png" alt="">
+        </router-link>
+        <h2>Welcome Back</h2>
+        <h5>Sign in to continue to Bug Tracker</h5>
       </div>
       <div class="form-body">
         <Form ref="formRef" :model="formData" :rules="formRules" label-position="top">
-          <Form-item label="用户名" prop="username">
-            <Input type="text" v-model="formData.username"/>
+          <Form-item prop="username">
+            <Input type="text" v-model="formData.username" placeholder="Username"/>
           </Form-item>
-          <Form-item label="密码" prop="password">
-            <Input type="password" v-model="formData.password"/>
+          <Form-item prop="password">
+            <Input type="password" v-model="formData.password" placeholder="Password"/>
           </Form-item>
-          <Checkbox v-model="formData.saveMe">七日内免登录</Checkbox>
+
+          <Button :loading="loading" long type="primary" @click="handleSubmit('formCustom')">SIGN IN</Button>
+
+          <div class="form-help clearfix">
+            <div class="fl-l">
+              <Checkbox v-model="formData.saveMe">Remember me</Checkbox>
+            </div>
+            <div class="fl-r">
+              <router-link to="/account/reset">
+                Forgot Password?
+              </router-link>
+            </div>
+          </div>
         </Form>
       </div>
       <div class="form-foot">
-        <Button :loading="loading" long type="primary" @click="handleSubmit('formCustom')">提交</Button>
+        No account? .
         <router-link to="/account/register">
-          <Button long type="ghost">注册</Button>
+          Create a free account now
         </router-link>
       </div>
     </div>
@@ -63,11 +79,13 @@
                   const user = {
                     username: this.formData.username,
                     token: res.Data.token,
-                    uid: res.Data.uid
+                    uid: res.Data.uid,
+                    email: res.Data.email,
+                    nickname: res.Data.nickname
                   };
                   this.$store.commit('SET_USER', user);
                   // local storage 存储一份
-                  if(this.$localStorage.get('user')){
+                  if (this.$localStorage.get('user')) {
                     this.$localStorage.remove('user');
                   }
                   this.$localStorage.set('user', JSON.stringify(user));
@@ -88,26 +106,50 @@
 <style scoped lang="scss" type="text/scss">
   .login {
     width: 350px;
-    margin: 8% auto 0 auto;
+    margin: 0 auto;
     &-form {
 
     }
     .form {
       &-head {
-        position: relative;
+        padding-top: 5rem;
         text-align: center;
-        letter-spacing: -.05em;
+        position: relative;
         line-height: 20px;
-        margin: 10px 0 30px;
         font-size: 25px;
+        img {
+          width: 84px;
+        }
+        h2 {
+          font-weight: 300;
+          color: #1d1e25;
+          font-size: 26px;
+          margin: 2rem 0 1rem;
+        }
+        h5 {
+          font-size: 16px;
+          font-weight: 300;
+          color: #666;
+          margin-bottom: 3rem;
+        }
       }
       &-body {
-
+        border-radius: 2px;
+        padding: 2rem 2.5rem;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, .12);
+        box-shadow: 0 0.25rem 1rem 0 rgba(0, 0, 0, .05);
+      }
+      &-help {
+        margin-top: .75rem;
+        label{
+          color: rgba(0,0,0,.6);
+        }
       }
       &-foot {
-        .ivu-btn{
-          margin-top: 20px;
-        }
+        text-align: center;
+        margin-top: 1.25rem;
+        color: rgba(0, 0, 0, .5);
       }
     }
   }

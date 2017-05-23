@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
+<g id="rails">
+</g>
+<g id="laravel">
+</g>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="160.6758" y1="241.1478" x2="148.4455" y2="66.2469">
+	<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.7"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.9"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M150.19,66.12L67.5,95.23l13.07,108.34l69.71,38.31l70.07-38.83l13.06-108.33L150.19,66.12z
+	 M212.99,197.86l-62.99,34.86v0l-62.02-34.4l-11.2-96.89l73.22-26.1v0l75.16,25.63L212.99,197.86z M150.06,81.19L150,81.05l0,0l0,0
+	v0L98.87,194.79l19.07-0.35l10.25-25.64h45.82l11.22,26l18.24,0.34L150.06,81.19z M150.13,117.52l17.25,36.1h-32.47L150.13,117.52z"
+	/>
+</svg>

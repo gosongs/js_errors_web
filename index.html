@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="/static/img/favicon.ico"/>
   <title>前端错误收集追踪平台</title>
-  <script src="/static/js/QError.js" crossorigin></script>
+  <script src="/static/js/BugTracker.js" crossorigin></script>
 </head>
 <body>
 <div id="app"></div>
 <script src="/static/js/jquery.min.js"></script>
 <script>
-  window.instance = window.instance || new QError.utils.errorHandler({
+  window.instance = window.instance || new BugTracker.utils.errorHandler({
       "key": "fb323843-9a03-4041-820b-25b7cac9a013",
       "userData": '', // 自定义数据
       "url": "http://localhost:3000/collect",
     });
 
   hello();
+  hwel();
 </script>
 </body>
 </html>

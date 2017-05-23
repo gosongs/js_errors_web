@@ -4,21 +4,24 @@ import Router from 'vue-router'
 import Dashboard from '../components/dashboard/Dashboard.vue'
 import Layout from '../components/common/Layout.vue'
 
-// project
-import ProjectCreate from '../components/project/Create.vue'
-import ProjectMy from '../components/project/My.vue'
-import ProjectInit from '../components/project/Init.vue'
+// setting
+import SettingLayout from '../components/setting/common/SetLayout.vue'
+import SettingHome from '../components/setting/SettingHome.vue'
+
+// setting > project
+import Projects from '../components/setting/projects/Projects.vue'
+import ProCreate from '../components/setting/projects/ProCreate.vue'
+import ProInit from '../components/setting/projects/ProInit.vue'
+import ProConfig from '../components/setting/projects/ProConfig.vue'
 
 // account
 import ALayout from '../components/account/ALayout.vue'
 import Login from '../components/account/Login.vue'
 import Register from '../components/account/Register.vue'
 
-import GenerateErr from '../components/GenerateErr.vue'
-
-// errors
-import ErrorsCount from '../components/errors/count/Count.vue'
-import ErrorsList from '../components/errors/List.vue'
+// dashboard
+import DashLayout from '../components/dashboard/common/DashLayout.vue'
+import DashAll from '../components/dashboard/DashAll.vue'
 
 Vue.use(Router)
 
@@ -26,55 +29,44 @@ const router = new Router({
   // mode: 'history',
   routes: [
     {
-      path: '/',
-      component: Layout,
+      path: '/dashboard/:key',
+      component: DashLayout,
       children: [
         {
-          path: 'dashboard',
-          component: Dashboard,
-          name: 'dashboard'
-        },
-        {
-          path: 'generateErr',
-          component: GenerateErr,
-          name: 'Generate An Error'
+          path: 'all',
+          component: DashAll,
+          name: 'All'
         }
       ]
     },
     {
-      path: '/project',
-      component: Layout,
+      path: '/settings',
+      component: SettingLayout,
       children: [
         {
-          path: 'create/:key',
-          component: ProjectCreate,
-          name: '新建项目'
+          path: '/',
+          component: SettingHome,
+          name: 'Settings'
         },
         {
-          path: 'my/:key',
-          component: ProjectMy,
-          name: '我的项目'
+          path: 'projects',
+          component: Projects,
+          name: 'Projects',
         },
         {
-          path: 'init/:type/:key',
-          component: ProjectInit,
-          name: '初始化项目'
-        }
-      ]
-    },
-    {
-      path: '/errors',
-      component: Layout,
-      children: [
-        {
-          path: 'list/:key',
-          component: ErrorsList,
-          name: '错误列表'
+          path: 'proconfig/:type/:key',
+          component: ProConfig,
+          name: 'Config'
         },
         {
-          path: 'count/:key',
-          component: ErrorsCount,
-          name: '错误统计'
+          path: 'procreate',
+          component: ProCreate,
+          name: 'Create new project'
+        },
+        {
+          path: 'proinit/:type/:key',
+          component: ProInit,
+          name: 'Integrate your application'
         }
       ]
     },

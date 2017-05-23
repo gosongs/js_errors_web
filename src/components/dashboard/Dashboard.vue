@@ -10,6 +10,9 @@
   export default{
     components: {
 
+    },
+    created(){
+      const key = this.$route.params.key;
     }
   }
 </script>

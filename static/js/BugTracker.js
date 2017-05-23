@@ -1,10 +1,10 @@
 ;(function () {
   'use strict';
 
-  window.QError = window.QError || {};
-  QError.utils = QError.utils || {};
-  QError.error = {};
-  QError.utils.errorHandler = function (conf) {
+  window.BugTracker = window.BugTracker || {};
+  BugTracker.utils = BugTracker.utils || {};
+  BugTracker.error = {};
+  BugTracker.utils.errorHandler = function (conf) {
     return {
       "conf": conf,
 
@@ -17,7 +17,7 @@
       },
 
       "handle": function () {
-        this.display("QError : " + window.instance.error.error);
+        this.display("BugTracker : " + window.instance.error.error);
         this.send(window.instance.error);
       },
 

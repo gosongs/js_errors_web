@@ -23,7 +23,7 @@
   .a-layout {
     background: #f7f7f7;
     &-main {
-      padding: 30px;
+
     }
   }
 </style>
