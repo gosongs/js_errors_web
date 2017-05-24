@@ -25,6 +25,7 @@ import DashAll from '../components/dashboard/DashAll.vue'
 
 Vue.use(Router)
 
+
 const router = new Router({
   // mode: 'history',
   routes: [
