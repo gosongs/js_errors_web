@@ -24,7 +24,7 @@
       </div>
       <div class="head-separator"></div>
       <div class="head-menu">
-        <router-link to="/" class="head-menu-item">Inbox</router-link>
+        <router-link to="/dashboard/home" class="head-menu-item">HOME</router-link>
         <router-link to="/" class="head-menu-item">TimeLine</router-link>
         <router-link to="/settings" class="head-menu-item">Settings</router-link>
       </div>
@@ -46,33 +46,28 @@
     computed: {
       project(){
         let list = this.$store.getters.projectsList || [];
-        let curName, curType;
+        let curName = 'Bug Tracker', curType = 'logo-default', res;
         const key = this.$route.params.key;
         if (list.length) {
           list.map((_, i) => {
             _['logoClass'] = 'logo-' + _.type;
-            if (_.key === key) {
+            if (key && _.key === key) {
               curName = _.name;
               curType = _.logoClass;
             }
           });
-          return {
-            curName,
-            curType,
-            list
-          };
-        } else {
-          return {
-            curName: '',
-            curType: '',
-            list: []
-          }
         }
+
+        return {
+          curName,
+          curType,
+          list
+        };
       }
     },
     methods: {
       jumpToProject(key){
-        this.$router.push('/dashboard/' + key);
+        this.$router.push('/dashboard/all/' + key);
         $('body').click();
       }
     },
@@ -93,6 +88,7 @@
     height: 35px;
     &-inner {
       position: fixed;
+      z-index: 9999;
       width: 100%;
       padding-right: 1.75rem;
       background: #212129;

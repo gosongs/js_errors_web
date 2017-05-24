@@ -1,14 +1,26 @@
 <template>
   <div class="side">
     <div class="side-all">
-      <b>4</b> Errors
+      <b>{{errorsCount.all}}</b> Errors now
     </div>
     <div class="side-menu">
       <div @click="jumpRoute('today')" class="side-menu-item">
-        Introduced Today (<b>4</b>)
+        Introduced Today (<b>{{errorsCount.today}}</b>)
       </div>
       <div @click="jumpRoute('all')" class="side-menu-item">
-        All (<b>4</b>)
+        All (<b>{{errorsCount.all}}</b>)
+      </div>
+      <div @click="jumpRoute('all')" class="side-menu-item second-level">
+        Open (<b>{{errorsCount.status.open}}</b>)
+      </div>
+      <div @click="jumpRoute('all')" class="side-menu-item second-level">
+        Closed (<b>{{errorsCount.status.closed}}</b>)
+      </div>
+      <div @click="jumpRoute('all')" class="side-menu-item second-level">
+        Ignore (<b>{{errorsCount.status.ignore}}</b>)
+      </div>
+      <div @click="jumpRoute('all')" class="side-menu-item second-level">
+        Immediately (<b>{{errorsCount.status.immediately}}</b>)
       </div>
     </div>
   </div>
@@ -16,10 +28,46 @@
 
 <script>
   export default{
+    data(){
+      return {
+        errorsCount: {
+          status: {
+            open: 0,
+            closed: 0,
+            ignore: 0,
+            immediately: 0
+          }
+        }
+      }
+    },
     methods: {
       jumpRoute(name){
         const key = this.$route.params.key;
         this.$router.push('/dashboard/' + key + '/' + name);
+      },
+      getErrorsCount(){
+        const data = {
+          key: this.$route.params.key
+        };
+        if (data.key) {
+          this.$store.dispatch('getErrorsCount', data)
+        }
+      }
+    },
+    computed: {
+      counts(){
+        return this.$store.getters.errorsCount
+      }
+    },
+    created(){
+      this.getErrorsCount();
+    },
+    watch: {
+      '$route': function () {
+        this.getErrorsCount();
+      },
+      'counts': function () {
+        this.errorsCount = this.counts;
       }
     }
   }
@@ -54,6 +102,9 @@
       line-height: 2.25rem;
       -webkit-transition: color .05s ease-out, background-color .05s ease-out;
       transition: color .05s ease-out, background-color .05s ease-out;
+      &.second-level {
+        text-indent: 0.8em;
+      }
       &:hover {
         color: #212129;
         background: rgba(10, 10, 20, 0.03);

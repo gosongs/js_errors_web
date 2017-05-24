@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>
-      Hello VUE
+      Dashboard HOME
     </h1>
   </div>
 </template>

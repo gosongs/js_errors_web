@@ -53,6 +53,10 @@ html {
   float: right;
 }
 
+.p10 {
+  padding: 10px !important;
+}
+
 .shadow {
   border-radius: 2px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
@@ -92,6 +96,10 @@ html {
     padding-bottom: 10px;
     border-bottom: 2px solid #e3e8ee;
     margin-bottom: 20px;
+    &.no-border {
+      margin-bottom: 0;
+      border: none;
+    }
     &:after {
       content: ".";
       display: block;
@@ -205,6 +213,16 @@ span.code {
   &:hover {
     color: #212129;
   }
+}
+
+.logo-default {
+  display: inline-block;
+  background: url("/static/img/logo.png") #fff;
+  background-size: 100%;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;
 }
 
 .logo-javascript {

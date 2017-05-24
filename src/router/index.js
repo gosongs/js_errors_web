@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Dashboard from '../components/dashboard/Dashboard.vue'
 import Layout from '../components/common/Layout.vue'
 
 // setting
@@ -20,8 +19,9 @@ import Login from '../components/account/Login.vue'
 import Register from '../components/account/Register.vue'
 
 // dashboard
+import Dashboard from '../components/dashboard/Dashboard.vue'
 import DashLayout from '../components/dashboard/common/DashLayout.vue'
-import DashAll from '../components/dashboard/DashAll.vue'
+import DashAll from '../components/dashboard/all/DashAll.vue'
 
 Vue.use(Router)
 
@@ -30,11 +30,16 @@ const router = new Router({
   // mode: 'history',
   routes: [
     {
-      path: '/dashboard/:key',
+      path: '/dashboard',
       component: DashLayout,
       children: [
         {
-          path: 'all',
+          path: 'home',
+          component: Dashboard,
+          name: 'Dashboard'
+        },
+        {
+          path: 'all/:key',
           component: DashAll,
           name: 'All'
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <div class="head-inner clearfix">
-      <router-link class="head-dashboard" to="/dashboard">< return to dashboard</router-link>
+      <router-link class="head-dashboard" to="/dashboard/home">< return to dashboard</router-link>
 
       <MiniHeadAccount></MiniHeadAccount>
     </div>

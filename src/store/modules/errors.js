@@ -4,11 +4,13 @@
 import * as types from '../mutations-types'
 
 const state = {
-  errorsList: []
+  errorsList: [],
+  errorsCount: {}
 }
 
 const getters = {
-  errorsList: state => state.errorsList
+  errorsList: state => state.errorsList,
+  errorsCount: state => state.errorsCount
 }
 
 const actions = {
@@ -25,12 +27,27 @@ const actions = {
 
         }
       })
+  },
+  getErrorsCount({commit, rootState}, data){
+    // const {key} = data;
+    const api = rootState.DEV_API;
+    $.post(api + '/errors/count', data)
+      .then(res => {
+        if (res.Code === 0) {
+          commit(types.ERRORS_COUNT, res.Data);
+        } else {
+
+        }
+      })
   }
 }
 
 const mutations = {
   [types.ERRORS_LIST] (state, errorsList){
     state.errorsList = errorsList
+  },
+  [types.ERRORS_COUNT] (state, errorsCount){
+    state.errorsCount = errorsCount
   }
 }
 

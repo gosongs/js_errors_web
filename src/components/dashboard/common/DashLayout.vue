@@ -8,6 +8,7 @@
         <transition name="fade" mode="out-in" appear>
           <router-view keep-alive></router-view>
         </transition>
+        <MyFoot></MyFoot>
       </div>
     </div>
   </div>
@@ -16,10 +17,12 @@
 <script>
   import DashHead from './DashHead.vue'
   import DashSide from './DashSide.vue'
+  import MyFoot from '../../common/Foot.vue'
   export default{
     components: {
       DashHead,
-      DashSide
+      DashSide,
+      MyFoot
     }
   }
 </script>
@@ -31,6 +34,8 @@
       height: calc(100% - 35px);
     }
     &-main {
+      overflow-y: scroll;
+      overflow-x: hidden;
       float: right;
       height: 100%;
       width: calc(100% - 21.5rem);

@@ -7,7 +7,7 @@
       <div class="home-item">
         <router-link to="/settings/projects" class="card">
           <div class="card-logo">
-            <img src="/static/img/logo.png" alt="">
+            <img src="/static/img/logo_projects.svg" alt="">
           </div>
           <div class="card-title">
             projects
