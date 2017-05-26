@@ -17,10 +17,10 @@
         <div class="create-form">
           <Form ref="formRef" :model="formData" :rules="formRules" label-position="top">
             <Form-item label="Project name" prop="name">
-              <Input v-model="formData.name" placeholder="请输入"/>
+              <Input v-model="formData.name" placeholder="Insert your project info"/>
             </Form-item>
             <Form-item label="Project type" prop="type">
-              <Select v-model="formData.type" placeholder="请选择" style="width:150px">
+              <Select v-model="formData.type" placeholder="Choose your project type" style="width:180px">
                 <Option value="javascript">Javascript</Option>
                 <Option value="react">React</Option>
                 <Option value="angular">Angular</Option>
@@ -35,7 +35,7 @@
             </Form-item>
             <Form-item label="Project info">
               <Input v-model="formData.info" type="textarea" :autosize="{minRows: 2,maxRows: 5}"
-                     placeholder="请输入..."/>
+                     placeholder="Insert your project info"/>
             </Form-item>
             <Form-item>
               <Button :loading="loading" type="primary" @click="submitForm">CONTINUE</Button>
@@ -78,7 +78,7 @@
     },
     computed: {
       statusText(){
-        return this.formData.enable ? '激活' : '未激活'
+        return this.formData.enable ? 'Activated' : 'Not active'
       }
     },
     methods: {

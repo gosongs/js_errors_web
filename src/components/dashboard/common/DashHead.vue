@@ -24,8 +24,8 @@
       </div>
       <div class="head-separator"></div>
       <div class="head-menu">
-        <router-link to="/dashboard/home" class="head-menu-item">HOME</router-link>
-        <router-link to="/" class="head-menu-item">TimeLine</router-link>
+        <!--<router-link to="/dashboard/home" class="head-menu-item">HOME</router-link>-->
+        <!--<router-link to="/" class="head-menu-item">TimeLine</router-link>-->
         <router-link to="/settings" class="head-menu-item">Settings</router-link>
       </div>
 
@@ -67,8 +67,8 @@
     },
     methods: {
       jumpToProject(key){
-        this.$router.push('/dashboard/all/' + key);
-        $('body').click();
+//        this.$router.push('/dashboard/all/' + key);
+//        $('body').click();
       }
     },
     created(){

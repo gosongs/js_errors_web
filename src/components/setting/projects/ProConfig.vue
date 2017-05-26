@@ -28,12 +28,12 @@
               <h4>{{project.key}}</h4>
             </div>
 
-            <div class="config-label bg">
-              <p class="link">Delete error data</p>
+            <div class="config-label bg" @click="clearPro">
+              <p class="link">Clear error data</p>
             </div>
 
-            <div class="config-label bg">
-              <p class="link" @click="deletePro">Delete project</p>
+            <div class="config-label bg" @click="deletePro">
+              <p class="link">Delete project</p>
             </div>
           </div>
         </div>
@@ -42,10 +42,22 @@
 
     <Modal
       v-model="deleteProModal"
-      title="删除"
+      title="DELETE"
+      ok-text="OK"
+      cancel-text="Cancel"
       @on-hide="hideModal"
       @on-ok="deleteProOk">
-      <p>确认删除吗? 删除以后不可恢复。</p>
+      <p>Confirm delete? Cannot be restored after deletion.</p>
+    </Modal>
+
+    <Modal
+      v-model="clearProModal"
+      title="CLEAR"
+      ok-text="OK"
+      cancel-text="Cancel"
+      @on-hide="hideModal"
+      @on-ok="clearProOk">
+      <p>Clear error data? Cannot be restored after deletion.</p>
     </Modal>
   </div>
 </template>
@@ -62,12 +74,14 @@
       deleteProModal(){
         return this.$store.state.currentModal === 'DELETE_MODAL';
       },
+      clearProModal(){
+        return this.$store.state.currentModal === 'CLEAR_MODAL';
+      },
       project(){
         const list = this.$store.getters.projectsList;
         let p = {
           name: ''
         };
-        console.log(list)
         if (list) {
           list.map((_, i) => {
             if (_.key = this.key) {
@@ -94,6 +108,26 @@
         $.post(api + '/project/remove', data)
           .then(res => {
             if (res.Code === 0) {
+              this.$Message.success('Success');
+              this.$router.push('/settings/projects');
+            } else {
+              this.$Message.error(res.Message);
+            }
+          })
+      },
+      clearPro(){
+        this.$store.commit('CURRENT_MODAL', 'CLEAR_MODAL');
+      },
+      clearProOk(){
+        const api = this.$store.state.DEV_API;
+        const data = {
+          uid: this.$store.state.user.uid,
+          key: this.key
+        };
+        $.post(api + '/project/clear', data)
+          .then(res => {
+            if (res.Code === 0) {
+              this.$Message.success('Success');
               this.$router.push('/settings/projects');
             } else {
               this.$Message.error(res.Message);
@@ -157,7 +191,7 @@
       h3 {
         font-weight: 600;
         color: #69696f;
-        font-size: 12px;
+        font-size: 14px;
       }
       h4 {
         color: #212129;

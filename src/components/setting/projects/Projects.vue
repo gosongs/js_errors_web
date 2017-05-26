@@ -14,7 +14,8 @@
           </div>
         </div>
         <div class="panel-body">
-          <Table stripe :columns="columns" :data="projectsList"></Table>
+          <Table stripe style="cursor: pointer;" :columns="columns" :data="projectsList"
+                 @on-row-click="clickRow"></Table>
         </div>
         <div class="panel-foot">
 
@@ -33,7 +34,7 @@
             title: 'PROJECT NAME',
             key: 'name',
             render(row, column, index){
-              return `<span class="project-name" @click="jumpToProject(${index})">${row.name}</span>`
+              return `<b class="project-name">${row.name}</b>`
             }
           },
           {
@@ -41,7 +42,7 @@
             key: 'status',
             width: 100,
             render(row, column, index){
-              return row.status ? '已激活' : '未激活'
+              return row.status ? 'Activated' : 'Not active'
             }
           },
           {
@@ -51,8 +52,7 @@
           },
           {
             title: 'CREATED AT',
-            key: 'createdAt',
-            width: 150,
+            width: 170,
             render (row, column, index) {
               let t = new Date(row.createdAt).format('yyyy-MM-dd hh:mm:ss')
               return t + '';
@@ -60,8 +60,7 @@
           },
           {
             title: 'UPDATED AT',
-            key: 'updatedAt',
-            width: 150,
+            width: 170,
             render (row, column, index) {
               let t = new Date(row.updatedAt).format('yyyy-MM-dd hh:mm:ss')
               return t + '';
@@ -85,13 +84,16 @@
         };
         this.$store.dispatch('getProjectsList', data);
       },
-      jumpToProject(index){
-        const {type, status, key} = this.projectsList[index];
+      jumpToProject(row){
+        const {type, status, key} = row;
         if (status) {
           this.$router.push('/settings/proconfig/' + type + '/' + key)
         } else {
           this.$router.push('/settings/proinit/' + type + '/' + key)
         }
+      },
+      clickRow(row){
+        this.jumpToProject(row);
       }
     },
     created(){
